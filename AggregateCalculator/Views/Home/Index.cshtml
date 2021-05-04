@@ -1,0 +1,51 @@
+﻿@model IEnumerable<AggregateCalculator.Models.ResultViewModel>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="/Home/Index">Aggregate Calculator</a>
+    </li>
+    <li class="breadcrumb-item active">Records</li>
+</ol>
+<!-- DataTables Example -->
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>@Html.DisplayNameFor(model => model.Aggregate) </th>
+                        <th>@Html.DisplayNameFor(model => model.isFail)</th>
+                        <th>@Html.DisplayNameFor(model => model.AggregateCategory)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        var Index = 1;
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@(Index)</td>
+                                <td>@item.Aggregate</td>
+                                <td>@(item.isFail ? "Fail" : "Pass")</td>
+                                <td>@item.AggregateCategory</td>
+                                <td><a onclick="location.href='@Url.Action("Edit")/@item.ScoresRecordId'">Edit</a></td>
+                            </tr>
+                            Index++;
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
